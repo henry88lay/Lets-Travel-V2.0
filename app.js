@@ -5,17 +5,10 @@ let Post = require('./models/posts').Post;
 
 mongoose.connect('mongodb://localhost/travels'), {useNewUrlParser: true};
 
-let Post1 = new Post({
-  id: 2,
-  title: 'Statue of Liberty',
-  date: new Date(),
-  description: 'Some Description',
-  text: 'some text',
-  country: 'USA',
-  imageURL: './images/1.jpg'
+app.get('/posts', async (req, resp) => {
+  let posts = await Post.find();
+  resp.send(posts);
 });
-
-Post1.save();
 
 app.use(express.static('public'));
 
