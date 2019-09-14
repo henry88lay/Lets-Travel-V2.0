@@ -41,3 +41,15 @@ footer .row {
 .w30 {
   width: 30%;
 }
+
+.articles {
+  margin-top: 15px;
+}
+
+.article-inline {
+  padding-left: 10px;
+}
+
+.article-inline:nth-of-type(odd) {
+  background: rgba(0, 0, 0, 0.05);
+}
