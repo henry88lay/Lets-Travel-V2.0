@@ -13,4 +13,4 @@ let postSchema = new Schema({
 
 let Post = mongoose.model('Post', postSchema);
 
-app.use(express.static('public'));
+module.exports = {Post};
