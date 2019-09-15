@@ -22,6 +22,15 @@ app.get('/posts', async (req, resp) => {
 
 app.post('/posts', async (req, resp) => {
   let reqBody = req.body;
+  let imgPath;
+  if (reqBody.imageURL) {
+    imgPath = reqBody.imageURL;
+  } else {
+    imgPath = req.file.path.substring(
+      req.file.path.indexOf('/'),
+      req.file.path.length
+    );
+  }
   let newPost = new Post({
     id: id++,
     title: reqBody.title,
@@ -29,10 +38,9 @@ app.post('/posts', async (req, resp) => {
     description: reqBody.description,
     text: reqBody.text,
     country: reqBody.country,
-    imageURL: reqBody.imageUrl
+    imageURL: imgPath
   });
-  console.log(req.file);
-  // await newPost.save();
+  await newPost.save();
   resp.send('Created');
 });
 
