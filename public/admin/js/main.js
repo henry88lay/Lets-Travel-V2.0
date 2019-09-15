@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         <button class="btn btn-link">Edit</button>
       </div>
       <div class="remove w5">
-        <button class="btn btn-link">X</button>
+        <button class="btn btn-link btn-remove">X</button>
       </div>
   </article>`;
     articles.insertAdjacentHTML('beforeend', postHTML);
