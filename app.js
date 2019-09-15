@@ -3,6 +3,7 @@ let app = express();
 let mongoose = require('mongoose');
 let Post = require('./models/posts').Post;
 let multer = require('multer');
+let uniqid = require('uniqid');
 
 mongoose.connect('mongodb://localhost/travels'), {useNewUrlParser: true};
 app.use(express.json());
@@ -12,8 +13,6 @@ let imageStorage = multer.diskStorage({
 });
 
 app.use(multer({storage: imageStorage}).single('imageFile'));
-
-let id = 1;
 
 app.get('/posts', async (req, resp) => {
   let posts = await Post.find();
@@ -32,7 +31,7 @@ app.post('/posts', async (req, resp) => {
     );
   }
   let newPost = new Post({
-    id: id++,
+    id: uniqid(),
     title: reqBody.title,
     date: new Date(),
     description: reqBody.description,

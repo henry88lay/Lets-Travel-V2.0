@@ -3,10 +3,12 @@ document.addEventListener('DOMContentLoaded', async function() {
   let posts = await getPosts();
   let articles = document.querySelector('.articles');
   articles.innerHTML = '';
+  let i = 1;
   posts.forEach(post => {
     let postHTML = `
     <article class="d-flex justify-content-between align-items-center article-inline">
-      <div class="id w5">${post.id}</div>
+      <div class="num w5">${i++}</div>
+      <input class="id" type="hidden" value="${post.id}">
       <div class="name w30">${post.title}</div>
       <div class="date w30">${post.date}</div>
       <div class="country w20">${post.country}</div>
