@@ -2,9 +2,16 @@ let express = require('express');
 let app = express();
 let mongoose = require('mongoose');
 let Post = require('./models/posts').Post;
+let multer = require('multer');
 
 mongoose.connect('mongodb://localhost/travels'), {useNewUrlParser: true};
 app.use(express.json());
+let imageStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'public/images'),
+  filename: (req, file, cb) => cb(null, file.originalname)
+});
+
+app.use(multer({storage: imageStorage}).single('imageFile'));
 
 let id = 1;
 
@@ -24,7 +31,8 @@ app.post('/posts', async (req, resp) => {
     country: reqBody.country,
     imageURL: reqBody.imageUrl
   });
-  await newPost.save();
+  console.log(req.file);
+  // await newPost.save();
   resp.send('Created');
 });
 
