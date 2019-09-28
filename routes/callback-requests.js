@@ -4,8 +4,9 @@ let express = require('express');
 let router = express.Router();
 
 router.get('/', async (req, resp) => {
-  await resp.send(CallbackRequest.find());
+  resp.send(await CallbackRequest.find());
 });
+
 router.post('/', async (req, resp) => {
   let reqBody = req.body;
   let newRequest = new CallbackRequest({
@@ -16,8 +17,9 @@ router.post('/', async (req, resp) => {
   await newRequest.save();
   resp.send('Accepted');
 });
+
 router.delete('/:id', async (req, resp) => {
-  CallbackRequest.deleteOne({id: req.params.id});
+  await CallbackRequest.deleteOne({id: req.params.id});
   resp.send('Deleted');
 });
 
